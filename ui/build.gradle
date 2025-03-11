@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.moowork.gradle:gradle-node-plugin:0.13")
+    }
+}
+
+apply plugin: 'com.moowork.node'
+apply plugin: 'base'
+version '0.0.1'
+
+node {
+    version = "4.5.0";
+    npmVersion = '2.15.9';
+    download = true;
+}
+
+clean.dependsOn npm_run_clean
+npm_test.dependsOn npm_run_lint
+check.dependsOn npm_test
+assemble.dependsOn npm_run_assemble
